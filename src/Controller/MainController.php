@@ -429,17 +429,20 @@ class MainController extends AbstractController
                         /** @var UploadedFile $file */
                         $fileName = $form->get('fileName')->getData();
                         $filePath = FS::conc($directoryPath, $fileName);
+                    
                         if ($fileSystem->exists($filePath)) {
                             $errors[] = 'Файл уже существует!';
+                        } else {
+                            try {
+                                $result = true;
+                                file_put_contents($filePath, $decodedFileData);
+                            } catch (\Throwable $e) {
+                                //файл удаляется PHP автоматически
+                                $errors[] = $e->getMessage();
+                                $result = false;
+                            }
                         }
-                        try {
-                            $result = true;
-                            file_put_contents($filePath, $decodedFileData);
-                        } catch (\Throwable $e) {
-                            //файл удаляется PHP автоматически
-                            $errors[] = $e->getMessage();
-                            $result = false;
-                        }
+                        
                     } else {
                         $errors[] = 'Ошибка валидации';
                         foreach ($form->getErrors(true, true) as $error) {
