@@ -29,8 +29,9 @@ class UserRepository extends ServiceEntityRepository
             ->from(User::class, 'u')
             ->where($qb->expr()->eq('u.directoryName', '?1'))
             ->setParameter(1, $fileName);
-        $query = $qb->getQuery();
-        return $query->getSingleResult();
+        $result = $qb->getQuery()->getResult();
+        
+        return count($result);
     }
 
 }
