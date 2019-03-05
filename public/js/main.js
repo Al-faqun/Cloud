@@ -5,15 +5,24 @@ my.closeDialog = function closeDialog() {
 };
 
 my.closeFile = function closeDialog(id) {
+    let children = $( id).find( ".selectable" );
+    for (let i = 0; i < children.length; i++) {
+        my.removeFromSelected(children[i].id);
+    }
     $(id).remove();
 };
 
 my.removeFromSelected = function (id) {
+    let tempSelected = [];
     for (let i = 0; i < selected.length; i++) {
         if (selected[i].id === id) {
-            selected.splice(i, 1);
+            $('#stairs' + id).removeClass('bordered');
+            $('#' + id).removeClass('bordered');
+        } else {
+            tempSelected.push(selected[i]);
         }
     }
+    selected = tempSelected;
 };
 
 //получить детей выбранной папки
@@ -124,6 +133,9 @@ my.newFolderProcess = function (event) {
                     alert(errorText);
                 } else {
                     my.getChildren(parentID, function (html) {
+                        //удаляем такую же папку, если она существует
+                        $('#stairs' + parentID).remove();
+                        my.removeFromSelected(parentID);
                         $('#stairs-place').append(html);
                     });
                     text = 'Успешно создали папку';
@@ -188,7 +200,6 @@ my.renameProcess = function (event) {
 //удалить выбранные файлы
 my.deleteFiles = function () {
     let errorText, text;
-    let deletedCount = 0, failedCount = 0;
     
     if (selected.length === 0) {
         alert('Выберите, что хотите удалить!');
@@ -202,11 +213,11 @@ my.deleteFiles = function () {
                 success: function (response, status, xhr) {
                     if (response.hasOwnProperty("result")) {
                         if (response.result === false) {
-                            failedCount++;
+                            alert(response.errors);
                         } else {
                             //удалим соответствующий элемент из DOMа
                             $('#' + id).remove();
-                            deletedCount++;
+                            alert('Успешно удалили файл ' + id);
                         }
                     } else {
                         errorText = 'Сервер вернул недопустимый ответ';
@@ -215,12 +226,6 @@ my.deleteFiles = function () {
                 }
             });
         }
-        if (failedCount === 0) {
-            text = 'Всё удалили!';
-        } else {
-            text = 'Удалили ' + deletedCount + ', не смогли удалить ' + failedCount;
-        }
-        alert(text);
     }
     
     return false;

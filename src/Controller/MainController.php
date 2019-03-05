@@ -319,6 +319,8 @@ class MainController extends AbstractController
                 $filePath = $session->get($id, null);
                 if (is_null($filePath) OR !$fileSystem->exists($filePath) ) {
                     $errors[] = 'Файл не найден';
+                }  elseif ((string)$id === '0') {
+                    $errors[] = 'Нельзя удалять домашнюю папку.';
                 }  else {
                     $fileSystem->remove($filePath);
                     $result = true;
