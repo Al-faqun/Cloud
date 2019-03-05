@@ -1,7 +1,7 @@
 {% if  files is defined and parentName is defined and parentID is defined %}
 	<div class="stairs" id="stairs{{ parentID }}">
 		{% if not files %}
-			<p><b>Папка:</b> {{ parentName }}</p>
+			<p class="selectable" id="{{ parentID }}" type="dir"><b>Папка:</b> {{ parentName }}</p>
 			<p>Пустая папка</p>
 		{% endif %}
 		{% for dirname, directory in files %}

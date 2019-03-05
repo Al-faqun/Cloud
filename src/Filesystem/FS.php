@@ -6,7 +6,7 @@ class FS extends \Symfony\Component\Filesystem\Filesystem
 {
     public static function cleanse($filename)
     {
-        return preg_replace('~[/\s\:;=*?"<>|]+~si', '', $filename);
+        return preg_replace('~[/\:;=*?"<>|]+~si', '', $filename);
     }
     
     /**
