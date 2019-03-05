@@ -3,5 +3,4 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     form_themes: ['bootstrap_4_layout.html.twig']
-    form_themes:
-        - '@TilowebBase64/form/fields.html.twig'
+

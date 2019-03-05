@@ -31,6 +31,7 @@ class MainController extends AbstractController
      */
     public function index(Request $request, AuthorizationCheckerInterface $authChecker, SessionInterface $session)
     {
+        
         $errors = [];
         $files = [];
         $homePath = '';
