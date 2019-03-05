@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Client;
 use App\Entity\User;
+use App\Filesystem\FS;
 use App\Form\RegistrationFormType;
 use App\Security\LoginFormAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,7 +35,7 @@ class RegistrationController extends AbstractController
             );
             
             $username = $form->get('username')->getData();
-            $userFolder = User::cleanse($username);
+            $userFolder = FS::cleanse($username);
             if ($entityManager->getRepository(User::class)->checkFolderExists($userFolder)
                 OR ($entityManager->getRepository(User::class)->findBy(['username' => $username]))
             ) {
