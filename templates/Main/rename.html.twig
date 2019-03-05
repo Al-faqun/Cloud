@@ -1,0 +1,7 @@
+<div class="form-embedd">
+	{{ form_start(form, {'attr': {'id': 'renameForm'}}) }}
+	{{ form_row(form.fileName, {'attr': {'id': 'renameForm-filename'}, 'value' : defaultValue}) }}
+	<button type="submit" class="btn btn-default" id="renameButton" onclick="return my.renameProcess(event)">Переименовать</button>
+	{{ form_end(form) }}
+	<button class="closebutt" onclick="my.closeDialog()">X</button>
+</div>

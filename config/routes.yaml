@@ -1,0 +1,104 @@
+app_logout:
+    path: /logout
+    options:
+        expose: true
+
+app_register:
+    path: /register
+    controller: App\Controller\RegistrationController::register
+
+app_login:
+    path: /login
+    controller: App\Controller\SecurityController::login
+
+index:
+    path: /
+    controller: App\Controller\MainController::index
+    options:
+        expose: true
+
+getChildren:
+    path: /folder/{parentID}/children
+    controller: App\Controller\MainController::getChildren
+    requirements:
+        parentID: '\d+'
+    options:
+        expose: true
+    methods:  [GET]
+
+getFile:
+    path: /file/{id}
+    controller: App\Controller\MainController::getFile
+    requirements:
+        id: '\d*'
+    options:
+        expose: true
+    methods:  [GET]
+
+deleteFile:
+    path: /file/{id}
+    controller: App\Controller\MainController::deleteFile
+    requirements:
+        id: '\d+'
+    options:
+        expose: true
+    methods:  [DELETE]
+
+download:
+    path: /file/{id}/download
+    controller: App\Controller\MainController::downloadFile
+    requirements:
+        id: '\d+'
+    options:
+        expose: true
+    methods:  [GET]
+
+uploadForm:
+    path: /uploadForm
+    controller: App\Controller\MainController::uploadForm
+    options:
+        expose: true
+    methods:  [GET]
+
+uploadProcess:
+    path: folder/{parentID}/upload
+    controller: App\Controller\MainController::uploadProcess
+    requirements:
+        parentID: '\d+'
+    options:
+        expose: true
+    methods:  [POST]
+
+getNewFolderForm:
+    path: /newfolderform
+    controller: App\Controller\MainController::newFolderForm
+    options:
+        expose: true
+    methods:  [GET]
+
+newFolderProcess:
+    path: /folder/{parentID}/new
+    controller: App\Controller\MainController::newFolderProcess
+    requirements:
+        parentID: '\d+'
+    options:
+        expose: true
+    methods:  [POST]
+
+getRenameForm:
+    path: /getRenameForm/{id}
+    controller: App\Controller\MainController::renameForm
+    requirements:
+        id: '\d+'
+    options:
+        expose: true
+    methods:  [GET]
+
+renameFormProcess:
+    path: /rename/{id}
+    controller: App\Controller\MainController::renameProcess
+    requirements:
+        id: '\d+'
+    options:
+        expose: true
+    methods:  [POST]

@@ -1,0 +1,9 @@
+<div>
+	{{ form_start(form, {'attr': {'id': 'newFolderForm'}}) }}
+	{{ form_row(form.fileName) }}
+	<input type="file" id="upload_form_file" name="file64" required="required" class="custom-file-input">
+	<button type="submit" class="btn btn-default" id="uploadButton" onclick="return my.uploadProcess(event)">Загрузить</button>
+	{{ form_end(form) }}
+
+	<button class="closebutt" onclick="my.closeDialog()">X</button>
+</div>

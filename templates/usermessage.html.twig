@@ -1,0 +1,16 @@
+{% if errors is empty %}
+	{% for message in messages %}
+		<p class="message"><strong>{{ message|e }}</strong></p>
+	{% endfor %}
+{% else %}
+	{% for error in errors %}
+		<span class="error"><strong><p>{{ error|e }}</p></strong></span>
+	{% endfor %}
+{% endif %}
+{% for label, messages in app.flashes %}
+	{% for message in messages %}
+		<div class="alert alert-{{ label }}">
+			{{ message }}
+		</div>
+	{% endfor %}
+{% endfor %}

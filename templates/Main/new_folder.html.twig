@@ -1,0 +1,7 @@
+<div class="form-embedd">
+	{{ form_start(form, {'attr': {'id': 'newFolderForm'}}) }}
+	{{ form_row(form.fileName, {'attr': {'id': 'newFolderForm-filename'}}) }}
+	<button type="submit" class="btn btn-default" id="newFolderButton" onclick="return my.newFolderProcess(event)">Создать</button>
+	{{ form_end(form) }}
+	<button class="closebutt" onclick="my.closeDialog()">X</button>
+</div>

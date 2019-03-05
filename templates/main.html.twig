@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Главная страница{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/main.css') }}"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://rawgit.com/carlo/jquery-base64/master/jquery.base64.min.js"></script>
+	<script src="{{ asset('js/main.js') }}"></script>
+	<script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+	<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+	
+	
+{% endblock %}
+{% block body %}
+	{% include 'navbar.html.twig' %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-1 col-lg-offset-1 col-md-10 col-lg-10 align-middle">
+				{% include 'usermessage.html.twig' %}
+				{% if (is_granted('ROLE_USER')) %}
+					<div id="stairs-place">
+						<div class="button-div">
+							<button type="button" class="" onclick="my.openFolder(0)">Домашняя папка</button>
+							<button type="button" class="" onclick="my.openFolder()">Открыть папку</button>
+							<button type="button" class="" onclick="my.newfolderShow()">Создать папку</button>
+							<button type="button" class="" onclick="my.uploadShow()">Загрузить</button>
+							<button type="button" class="" onclick="my.renameShow()">Переименовать</button>
+							<button type="button" class="" onclick="my.deleteFiles()">Удалить</button>
+							<button type="button" class="" onclick="my.download()">Скачать</button>
+						</div>
+						{% include 'Main/stairs.html.twig' %}
+					</div>
+					<div class="back-dialog" id="dialog">
+						<!-- Блок со скрытым контентом -->
+						<div class="dialog-content" id="dialog-content">
+						</div>
+					</div>
+				{% endif %}
+			</div>
+			
+		</div>
+	</div>
+
+{% endblock %}

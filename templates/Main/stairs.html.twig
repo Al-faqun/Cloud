@@ -1,0 +1,20 @@
+{% if  files is defined and parentName is defined and parentID is defined %}
+	<div class="stairs" id="stairs{{ parentID }}">
+		{% if not files %}
+			<p><b>Папка:</b> {{ parentName }}</p>
+			<p>Пустая папка</p>
+		{% endif %}
+		{% for dirname, directory in files %}
+			<p><b>Папка:</b> {{ dirname }}</p>
+			<label for="select_{{ dirname }}">Внутри</label>
+			
+			<ul id="select_{{ dirname }}">
+				{% for key, file in directory %}
+					<li class="selectable" id="{{ file.id }}" type="{{ file.type }}">{{ file.name }}</li>
+				{% endfor %}
+			</ul>
+		{% endfor %}
+		
+		<button class="float-right" onclick="my.closeFile(stairs{{ parentID }})">X</button>
+	</div>
+{% endif %}
