@@ -8,6 +8,14 @@ my.closeFile = function closeDialog(id) {
     $(id).remove();
 };
 
+my.removeFromSelected = function (id) {
+    for (let i = 0; i < selected.length; i++) {
+        if (selected[i].id === id) {
+            selected.splice(i, 1);
+        }
+    }
+};
+
 //получить детей выбранной папки
 my.getChildren = function (parentID, afterFunction) {
     let errorText;
@@ -74,7 +82,9 @@ my.openFolder = function (id) {
     
     if (id !== undefined) {
         my.getChildren(id, function (html) {
+            //удаляем такую же папку, если она существует
             $('#stairs' + id).remove();
+            my.removeFromSelected(id);
             $('#stairs-place').append(html);
         });
     }
@@ -301,11 +311,7 @@ $( document ).ready(function() {
         let id = $(this).attr('id');
         if ($(this).hasClass('bordered')) {
             $(this).removeClass('bordered');
-            for (i = 0; i < selected.length; i++) {
-                if (selected[i].id === id) {
-                    selected.splice(i, 1);
-                }
-            }
+            my.removeFromSelected(id);
         } else {
             //выбрать
             selected.push({id: id, type: $(this).attr('type')});
