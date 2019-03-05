@@ -74,6 +74,7 @@ my.openFolder = function (id) {
     
     if (id !== undefined) {
         my.getChildren(id, function (html) {
+            $('#stairs' + id).remove();
             $('#stairs-place').append(html);
         });
     }
